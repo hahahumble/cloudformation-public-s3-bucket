@@ -7,13 +7,12 @@ In this example, I create a simple **CloudFormation template** that **deploys a 
 ```text
 .
 ├── README.md       
-└── bucket.yml  # CloudFormation template
+└── bucket.YAML  # CloudFormation template
 ```
 
-## 🔭 Operations
+## 📝 Instructions
 
 ### Deploy Stack
-
 ```shell
 aws cloudformation deploy --template-file ./bucket.YAML --stack-name demo-public-s3-bucket
 ```
