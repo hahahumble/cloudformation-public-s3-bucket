@@ -1,0 +1,33 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: CloudFormation template for public read s3 bucket
+
+Parameters:
+  BucketName:
+    Type: String
+    Description: Name of the bucket
+    Default: demo-public-s3-bucket
+
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref BucketName
+
+  S3BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref S3Bucket
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Sid: DemoPublicReadS3Bucket
+            Effect: Allow
+            Principal: '*'  # Allow all users
+            Action:
+              - 's3:GetObject'  # Allow read access
+            Resource: !Sub 'arn:aws:s3:::${S3Bucket}/*'  # Allow access to all objects in the bucket
+
+Outputs:
+  S3BucketName:
+    Value: !Ref S3Bucket
+    Description: Name of the S3 bucket
